@@ -1,5 +1,6 @@
 package com.dio.santander.bankline.api.service;
 
+import com.dio.santander.bankline.api.dto.DeletarMovimentacao;
 import com.dio.santander.bankline.api.dto.NovaMovimentacao;
 import com.dio.santander.bankline.api.model.Correntista;
 import com.dio.santander.bankline.api.model.Movimentacao;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Service
 public class MovimentacaoService {
@@ -22,7 +22,7 @@ public class MovimentacaoService {
     private CorrentistaRepository correntistaRepository;
     public void save(NovaMovimentacao novaMovimentacao){
 
-        Double valor = novaMovimentacao.getTipo() == MovimentacaoTipo.Receita ? novaMovimentacao.getValor() : novaMovimentacao.getValor() * -1;
+        Double valor = novaMovimentacao.getTipo() == MovimentacaoTipo.Entrada ? novaMovimentacao.getValor() : novaMovimentacao.getValor() * -1;
 
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setDataHora(LocalDateTime.now());
@@ -39,5 +39,8 @@ public class MovimentacaoService {
         }
 
         repository.save(movimentacao);
+    }
+    public void delete(DeletarMovimentacao deletarMovimentacao){
+        repository.findById(deletarMovimentacao.getId()).ifPresent(movimentacao -> repository.delete(movimentacao));
     }
 }

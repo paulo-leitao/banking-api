@@ -1,5 +1,6 @@
 package com.dio.santander.bankline.api.controller;
 
+import com.dio.santander.bankline.api.dto.DeletarMovimentacao;
 import com.dio.santander.bankline.api.dto.NovaMovimentacao;
 import com.dio.santander.bankline.api.model.Movimentacao;
 import com.dio.santander.bankline.api.repository.MovimentacaoRepository;
@@ -25,6 +26,9 @@ public class MovimentacaoController {
     public List<Movimentacao> findAll(@PathVariable("idConta") Integer idConta){
         return repository.findByIdConta(idConta);
     }
+    @CrossOrigin
+    @DeleteMapping("/{id}")
+    public void delete(@RequestBody DeletarMovimentacao movimentacao) {service.delete(movimentacao);}
     @PostMapping
     public void save(@RequestBody NovaMovimentacao movimentacao){
         service.save(movimentacao);

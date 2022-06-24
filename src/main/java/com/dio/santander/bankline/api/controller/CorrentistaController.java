@@ -7,8 +7,6 @@ import com.dio.santander.bankline.api.model.Correntista;
 import com.dio.santander.bankline.api.repository.CorrentistaRepository;
 import com.dio.santander.bankline.api.service.CorrentistaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +24,12 @@ public class CorrentistaController {
     public List<Correntista> findAll(){
         return repository.findAll();
     }
+
+    @GetMapping("/{uid}")
+    public List<Correntista> findAll(@PathVariable("uid") String uid){
+        return repository.findByUid(uid);
+    }
+
     @PostMapping
     public void save(@RequestBody NovoCorrentista correntista){
         service.save(correntista);

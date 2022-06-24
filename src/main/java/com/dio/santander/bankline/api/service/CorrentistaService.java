@@ -20,6 +20,8 @@ public class CorrentistaService {
         Correntista correntista = new Correntista();
         correntista.setCpf(novoCorrentista.getCpf());
         correntista.setNome(novoCorrentista.getNome());
+        correntista.setEmail(novoCorrentista.getEmail());
+        correntista.setUid(novoCorrentista.getUid());
 
         Conta conta = new Conta();
         conta.setSaldo(0.0);
